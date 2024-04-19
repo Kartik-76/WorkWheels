@@ -11,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<ICompanyServices, CompanyServices>();
 builder.Services.AddScoped<ICompanyRepo, CompanyRepo>();
+builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
+builder.Services.AddScoped<IUserApplicationRepo, UserApplicationRepo>();
 
 builder.Services.AddDbContext<RideSharingPlatformContext>
     (item => item.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
