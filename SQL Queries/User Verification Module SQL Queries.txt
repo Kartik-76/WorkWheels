@@ -1,0 +1,48 @@
+-- Drop the existing tables if they exist
+IF OBJECT_ID('UserApplication', 'U') IS NOT NULL
+    DROP TABLE UserApplication;
+IF OBJECT_ID('Companies', 'U') IS NOT NULL
+    DROP TABLE Companies;
+IF OBJECT_ID('DrivingLicence', 'U') IS NOT NULL
+    DROP TABLE DrivingLicence;
+
+-- Create table 1: UserApplication
+CREATE TABLE UserApplication (
+    UserId INT PRIMARY KEY IDENTITY(1,1),
+    Username VARCHAR(25) UNIQUE,
+    OfficialEmail VARCHAR(25) UNIQUE,
+    Phoneno VARCHAR(10),
+    CompanyId INT,
+    Designation VARCHAR(50),
+    Role VARCHAR(20),
+    EmployeeId VARCHAR(10),
+    AadharNumber VARCHAR(12),
+    ApplicationStatus VARCHAR(10),
+    CONSTRAINT CHK_PhoneLength CHECK (LEN(Phoneno) = 10),
+    CONSTRAINT CHK_AadharLength CHECK (LEN(AadharNumber) = 12),
+    CONSTRAINT CHK_ApplicationStatus CHECK (ApplicationStatus IN ('New', 'Approved', 'Rejected')),
+    CONSTRAINT CHK_Role CHECK (Role IN ('Motorist', 'Rider', 'SecurityHead')),
+    FOREIGN KEY (CompanyId) REFERENCES Companies(Id)
+);
+
+-- Create table 2: Companies
+CREATE TABLE Companies (
+    Id INT PRIMARY KEY,
+    CompanyName VARCHAR(100),
+    BuildingName VARCHAR(10),
+    SecurityInchargeName VARCHAR(30),
+    SecurityHelpDeskNumber VARCHAR(10),
+    CONSTRAINT CHK_SecurityHelpDeskLength CHECK (LEN(SecurityHelpDeskNumber) = 10)
+);
+
+-- Create table 3: DrivingLicence
+CREATE TABLE DrivingLicence (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    UserId INT,
+    LicenseNo VARCHAR(10),
+    ExpirationDate DATE,
+    RTO VARCHAR(20),
+    AllowedVehicle VARCHAR(100),
+    CONSTRAINT CHK_ExpirationDate CHECK (ExpirationDate >= GETDATE()),
+    FOREIGN KEY (UserId) REFERENCES UserApplication(UserId)
+);
