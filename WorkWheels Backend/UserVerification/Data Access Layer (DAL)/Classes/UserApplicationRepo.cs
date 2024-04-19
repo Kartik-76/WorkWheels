@@ -1,4 +1,5 @@
-﻿using RideSharingPlatform.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using RideSharingPlatform.Models;
 using RideSharingPlatform.UserVerification.Data_Access_Layer__DAL_.Interfaces;
 
 namespace RideSharingPlatform.UserVerification.Data_Access_Layer__DAL_.Classes
@@ -15,6 +16,15 @@ namespace RideSharingPlatform.UserVerification.Data_Access_Layer__DAL_.Classes
             var result = await _context.UserApplications.AddAsync(userApplication);
             await _context.SaveChangesAsync();
             return result.Entity;
+        }
+
+        public async Task<IEnumerable<UserApplication>> GetPendingApplications()
+        {
+            const string PendingStatus = "New";
+            var pendingApplication = await _context.UserApplications
+                .Where(app=>app.ApplicationStatus == PendingStatus)
+                .ToListAsync();
+            return pendingApplication;
         }
     }
 }

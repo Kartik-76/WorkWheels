@@ -5,5 +5,6 @@ namespace RideSharingPlatform.UserVerification.Data_Access_Layer__DAL_.Interface
     public interface IUserApplicationRepo
     {
         Task <UserApplication> CreateNewApplication(UserApplication userApplication);
+        Task <IEnumerable<UserApplication>> GetPendingApplications();
     }
 }

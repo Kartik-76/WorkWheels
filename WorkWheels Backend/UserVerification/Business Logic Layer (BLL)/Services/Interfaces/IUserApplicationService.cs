@@ -6,6 +6,7 @@ namespace RideSharingPlatform.UserVerification.Business_Logic_Layer__BLL_.Servic
     public interface IUserApplicationService
     {
         Task<UserApplicationResponseDTO> CreateNewApplication(UserApplicationRequestDTO userApplicationRequestDTO);
+        Task<IEnumerable<UserApplicationResponseDTO>> GetPendingApplications();
 
     }
 }

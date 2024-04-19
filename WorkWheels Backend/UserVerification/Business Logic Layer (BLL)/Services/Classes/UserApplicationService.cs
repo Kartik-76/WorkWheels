@@ -17,7 +17,7 @@ namespace RideSharingPlatform.UserVerification.Business_Logic_Layer__BLL_.Servic
             this._userApplicationRepo = userApplicationRepo;
         }
 
-        //Handling POST Method for creating new User Application
+        // Handling POST Method for creating new User Application
 
         public async Task<UserApplicationResponseDTO> CreateNewApplication(UserApplicationRequestDTO userApplicationRequestDTO)
         {
@@ -68,6 +68,26 @@ namespace RideSharingPlatform.UserVerification.Business_Logic_Layer__BLL_.Servic
 
         }
 
+        // Handling Get Method for Fetching all the pending Applications 
+        public async Task<IEnumerable<UserApplicationResponseDTO>> GetPendingApplications()
+        {
+            var result = await _userApplicationRepo.GetPendingApplications();
+            List<UserApplicationResponseDTO> userApplicationResponseDTOs = new();
+            foreach(var applications in result)
+            {
+                var applicationResponse = new UserApplicationResponseDTO(applications);
+                userApplicationResponseDTOs.Add(applicationResponse);
+            }
+            return (IEnumerable<UserApplicationResponseDTO>)userApplicationResponseDTOs;
+        }
+
+        
+        
+        
+        
+        
+        
+        
         //Double validation checker methods
         private bool IsValid(UserApplicationRequestDTO userApplicationRequestDTO)
         {

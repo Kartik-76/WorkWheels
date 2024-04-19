@@ -40,5 +40,12 @@ namespace RideSharingPlatform.Controllers
                 return BadRequest(ModelState);
             }
         }
+
+        [HttpGet("applications")]
+        public async Task<IActionResult> GetPendingApplications()
+        {
+            var result = await _userApplicationService.GetPendingApplications();
+            return Ok(result);
+        }
     }
 }

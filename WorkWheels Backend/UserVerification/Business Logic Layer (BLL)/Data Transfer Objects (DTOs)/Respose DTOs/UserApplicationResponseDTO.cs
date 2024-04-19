@@ -42,5 +42,19 @@ namespace RideSharingPlatform.UserVerification.Business_Logic_Layer__BLL_.Data_T
             this.ExpirationDate = drivingLicence.ExpirationDate;
             this.Rto = drivingLicence.Rto;  
         }
+
+        public UserApplicationResponseDTO(UserApplication userApplication)
+        {
+            this.UserId = userApplication.UserId;
+            this.Username = userApplication.Username;
+            this.OfficialEmail = userApplication.OfficialEmail;
+            this.Phoneno = userApplication.Phoneno;
+            this.CompanyId = userApplication.CompanyId;
+            this.Designation = userApplication.Designation;
+            this.Role = userApplication.Role;
+            this.EmployeeId = userApplication.EmployeeId;
+            this.AadharNumber = userApplication.AadharNumber;
+            this.ApplicationStatus = userApplication.ApplicationStatus;
+        }
     }
 }
