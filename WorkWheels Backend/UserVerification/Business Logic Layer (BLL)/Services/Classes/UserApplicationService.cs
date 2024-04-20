@@ -81,13 +81,20 @@ namespace RideSharingPlatform.UserVerification.Business_Logic_Layer__BLL_.Servic
             return (IEnumerable<UserApplicationResponseDTO>)userApplicationResponseDTOs;
         }
 
-        
-        
-        
-        
-        
-        
-        
+        // Handling GET Method for Fetching Application of particular user
+        public async Task<UserApplicationResponseDTO> GetApplicationByUserId(int userId)
+        {
+            var result = await _userApplicationRepo.GetApplicationByUserId(userId);
+            var applicationResponse = new UserApplicationResponseDTO(result);
+            return applicationResponse;
+        }
+
+
+
+
+
+
+
         //Double validation checker methods
         private bool IsValid(UserApplicationRequestDTO userApplicationRequestDTO)
         {

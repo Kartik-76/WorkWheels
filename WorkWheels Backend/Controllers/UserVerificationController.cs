@@ -47,5 +47,12 @@ namespace RideSharingPlatform.Controllers
             var result = await _userApplicationService.GetPendingApplications();
             return Ok(result);
         }
+
+        [HttpGet("applications/{userId}")]
+        public async Task<IActionResult> GetApplicationByUserId(int userId)
+        {
+            var result = await _userApplicationService.GetApplicationByUserId(userId);
+            return Ok(result);
+        }
     }
 }

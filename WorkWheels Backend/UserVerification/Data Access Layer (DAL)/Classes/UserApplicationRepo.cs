@@ -26,5 +26,11 @@ namespace RideSharingPlatform.UserVerification.Data_Access_Layer__DAL_.Classes
                 .ToListAsync();
             return pendingApplication;
         }
+
+        public async Task<UserApplication> GetApplicationByUserId(int userId)
+        {
+            var result = await _context.UserApplications.Where(app=>app.UserId == userId).AsNoTracking().FirstOrDefaultAsync();
+            return result;
+        }
     }
 }
