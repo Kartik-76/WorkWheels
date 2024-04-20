@@ -7,6 +7,10 @@ namespace RideSharingPlatform.UserVerification.Data_Access_Layer__DAL_.Interface
         Task <UserApplication> CreateNewApplication(UserApplication userApplication);
         Task <IEnumerable<UserApplication>> GetPendingApplications();
         Task<UserApplication> GetApplicationByUserId(int userId);
+
+        void UpdateApplicationStatus(UserApplication userApplication);
+        Task<UserApplication> GetApplicationById(int id);
+        Task<int> SaveChangesAsync();
         
     }
 }

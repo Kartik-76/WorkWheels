@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using RideSharingPlatform.Models;
 using RideSharingPlatform.UserVerification.Business_Logic_Layer__BLL_.Data_Transfer_Objects__DTOs_.Request_DTOs;
 using RideSharingPlatform.UserVerification.Business_Logic_Layer__BLL_.Data_Transfer_Objects__DTOs_.Respose_DTOs;
@@ -87,6 +88,20 @@ namespace RideSharingPlatform.UserVerification.Business_Logic_Layer__BLL_.Servic
             var result = await _userApplicationRepo.GetApplicationByUserId(userId);
             var applicationResponse = new UserApplicationResponseDTO(result);
             return applicationResponse;
+        }
+
+        // Handling Put Method for updating Application status
+        public async Task<IActionResult> UpdateApplicationStatus(UpdateUserApplicationRequestDTO updateUserApplicationRequestDTO)
+        {
+            var application = await _userApplicationRepo.GetApplicationById(updateUserApplicationRequestDTO.UserId);
+            if(application == null)
+            {
+                return new NotFoundObjectResult(new { Message = "Application not found" });
+            }
+            application.ApplicationStatus = updateUserApplicationRequestDTO.UpdatedStatus;
+            _userApplicationRepo.UpdateApplicationStatus(application);
+            await _userApplicationRepo.SaveChangesAsync();
+            return new OkObjectResult(new { Message = "Application Status Updated Successfully" });
         }
 
 

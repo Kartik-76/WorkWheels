@@ -54,5 +54,11 @@ namespace RideSharingPlatform.Controllers
             var result = await _userApplicationService.GetApplicationByUserId(userId);
             return Ok(result);
         }
+
+        [HttpPut("applications/approvereject")]
+        public async Task<IActionResult> UpdateApplicationStatus(UpdateUserApplicationRequestDTO updateUserApplicationRequestDTO)
+        {
+            return await _userApplicationService.UpdateApplicationStatus(updateUserApplicationRequestDTO);
+        }
     }
 }

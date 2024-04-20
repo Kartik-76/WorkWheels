@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RideSharingPlatform.Models;
 using RideSharingPlatform.UserVerification.Data_Access_Layer__DAL_.Interfaces;
 
@@ -31,6 +32,21 @@ namespace RideSharingPlatform.UserVerification.Data_Access_Layer__DAL_.Classes
         {
             var result = await _context.UserApplications.Where(app=>app.UserId == userId).AsNoTracking().FirstOrDefaultAsync();
             return result;
+        }
+
+        public void UpdateApplicationStatus(UserApplication userApplication)
+        {
+            _context.Entry(userApplication).State = EntityState.Modified;
+        }
+
+        public async Task<UserApplication> GetApplicationById(int id)
+        {
+            return await _context.UserApplications.FindAsync(id);
+            
+        }
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
         }
     }
 }
