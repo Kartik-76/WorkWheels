@@ -12,5 +12,6 @@ namespace RideSharingPlatform.UserVerification.Data_Access_Layer__DAL_.Interface
         Task<UserApplication> GetApplicationById(int id);
         Task<int> SaveChangesAsync();
         
+        void DeleteApplication(int userId);
     }
 }

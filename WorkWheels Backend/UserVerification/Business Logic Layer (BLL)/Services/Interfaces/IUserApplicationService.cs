@@ -10,5 +10,6 @@ namespace RideSharingPlatform.UserVerification.Business_Logic_Layer__BLL_.Servic
         Task<IEnumerable<UserApplicationResponseDTO>> GetPendingApplications();
         Task<UserApplicationResponseDTO> GetApplicationByUserId(int userId);
         Task<IActionResult> UpdateApplicationStatus(UpdateUserApplicationRequestDTO updateUserApplicationRequestDTO);
+        Task<IActionResult> DeleteApplication(int userId);
     }
 }

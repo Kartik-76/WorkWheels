@@ -48,5 +48,17 @@ namespace RideSharingPlatform.UserVerification.Data_Access_Layer__DAL_.Classes
         {
             return await _context.SaveChangesAsync();
         }
+
+        public void DeleteApplication(int userId)
+        {
+            UserApplication application = _context.UserApplications.Find(userId);
+            if (application != null)
+            {
+                DrivingLicence drivingLicence = _context.DrivingLicences.Where(app=>app.UserId == userId).FirstOrDefault();
+                _context.DrivingLicences.Remove(drivingLicence);
+                _context.UserApplications.Remove(application);
+
+            }
+        }
     }
 }

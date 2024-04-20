@@ -60,5 +60,11 @@ namespace RideSharingPlatform.Controllers
         {
             return await _userApplicationService.UpdateApplicationStatus(updateUserApplicationRequestDTO);
         }
+
+        [HttpDelete("applications/delete/{userId}")]
+        public async Task<IActionResult>DeleteApplication(int userId)
+        {
+            return await _userApplicationService.DeleteApplication(userId);
+        }
     }
 }

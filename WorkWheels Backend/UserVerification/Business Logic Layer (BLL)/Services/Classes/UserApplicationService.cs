@@ -104,6 +104,15 @@ namespace RideSharingPlatform.UserVerification.Business_Logic_Layer__BLL_.Servic
             return new OkObjectResult(new { Message = "Application Status Updated Successfully" });
         }
 
+        // Handling Delete Method for deleting the application with particular userId
+
+        public async Task<IActionResult> DeleteApplication(int userId)
+        {
+            _userApplicationRepo.DeleteApplication(userId);
+            await _userApplicationRepo.SaveChangesAsync();
+            return new OkObjectResult(new { Message = "Application Deleted Successfully" });
+        }
+
 
 
 
